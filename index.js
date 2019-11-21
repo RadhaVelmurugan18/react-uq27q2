@@ -3,6 +3,8 @@ import { render } from 'react-dom';
 import Hello from './Hello';
 import './style.css';
 import Fruits from './Fruits';
+import Basket from './Basket';
+import Button from './Button';
 
 class App extends Component {
   constructor() {
@@ -10,19 +12,24 @@ class App extends Component {
     this.state = {
       name: 'React',
       fruits: ['fruit1','fruit2','fruit3'],
-      selectedFruitValue : ''
+      selectedFruitValue : '',
+      basketList: [],
     };
-    //this.selectedFruit = this.selectedFruit.bind(this);
+    this.selectedFruit = this.selectedFruit.bind(this);
   }
-  componentDidUpdate(prevProps,prevState){
+  /*componentDidUpdate(prevProps,prevState){
   console.log(this.state.selectedFruitValue+'---updated');
-}
-selectedFruit(){
+}*/
+selectedFruit() {
   const index = event.target.selectedIndex;
-  const selectedOption = event.target.options[index].value;
-  this.setState({selectedFruitValue:selectedOption});
+  let selectedOption = event.target.options[index].value;
+  this.setState({selectedFruitValue:selectedOption,});
   /*this.setState((state)=> {return selectedFruitValue = selectedOption});*/
-    console.log(this.state.selectedFruitValue);
+};
+
+addOrRemove(value){
+  console.log(value);
+
 }
 
 
@@ -33,7 +40,9 @@ selectedFruit(){
         <p>
           Start editing to see some magic happen :)
         </p>
-        <Fruits fruits={this.state.fruits} selectedFruitFn={e => this.selectedFruit()}/>
+        <Fruits fruits={this.state.fruits} selectedFruitValue={this.state.selectedFruitValue} selectedFruitFn={this.selectedFruit}/>
+        <Button clickFunction={this.addOrRemove}/>
+        <Basket basketInput={this.state.selectedFruitValue}/>
       </div>
     );
   }

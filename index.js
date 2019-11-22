@@ -5,7 +5,8 @@ import './style.css';
 import Fruits from './Fruits';
 import Basket from './Basket';
 import Button from './Button';
-
+import ColorPicker from './ColorPicker';
+import ApplySelectedColor from './ApplySelectedColor';
 class App extends Component {
   constructor() {
     super();
@@ -14,12 +15,12 @@ class App extends Component {
       fruits: ['fruit1','fruit2','fruit3'],
       selectedFruitValue : '',
       basketList: [],
+      selectedColor:'',
+     colorsArray:['Grey','Pink','Orange','Yellow','Green','Black']
     };
-    this.selectedFruit = this.selectedFruit.bind(this);
+   
   }
-  /*componentDidUpdate(prevProps,prevState){
-  console.log(this.state.selectedFruitValue+'---updated');
-}*/
+
 selectedFruit() {
   const index = event.target.selectedIndex;
   let selectedOption = event.target.options[index].value;
@@ -32,17 +33,24 @@ addOrRemove(value){
 
 }
 
+colorPickerFn(color){
+
+  let colorPicked=color;
+  this.setState({
+    selectedColor:color
+  })
+  console.log('check',color);
+}
 
   render() {
     return (
       <div>
-        <Hello name={this.state.name} />
-        <p>
-          Start editing to see some magic happen :)
-        </p>
-        <Fruits fruits={this.state.fruits} selectedFruitValue={this.state.selectedFruitValue} selectedFruitFn={this.selectedFruit}/>
-        <Button clickFunction={this.addOrRemove}/>
-        <Basket/>
+  
+       
+        <ColorPicker 
+        selectedColor={(e)=>this.colorPickerFn(e)}
+        colorsArray={this.state.colorsArray} />
+        <ApplySelectedColor color={this.state.selectedColor}  selectedColor={(e)=>this.colorPickerFn(e)}/>
       </div>
     );
   }

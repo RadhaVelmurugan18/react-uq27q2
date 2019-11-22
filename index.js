@@ -42,7 +42,7 @@ addOrRemove(value){
         </p>
         <Fruits fruits={this.state.fruits} selectedFruitValue={this.state.selectedFruitValue} selectedFruitFn={this.selectedFruit}/>
         <Button clickFunction={this.addOrRemove}/>
-        <Basket basketInput={this.state.selectedFruitValue}/>
+        <Basket/>
       </div>
     );
   }

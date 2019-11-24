@@ -1,5 +1,8 @@
 import React from 'react';
 
-export default function Basket(){
-return <h1>test</h1>;
+export default function Basket(props){
+  const basketList  = props.basketList.map((value,index) => {
+return <li>{value}</li>
+  })
+return <ul>{basketList}</ul>;
 }

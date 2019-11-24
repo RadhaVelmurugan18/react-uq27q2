@@ -11,9 +11,8 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
-      name: 'React',
       fruits: ['fruit1','fruit2','fruit3'],
-      selectedFruitValue : '',
+      selectedFruitValue : 'fruit1',
       basketList: [],
       selectedColor:'',
      colorsArray:['Grey','Pink','Orange','Yellow','Green','Black']
@@ -21,36 +20,42 @@ class App extends Component {
    
   }
 
-selectedFruit() {
-  const index = event.target.selectedIndex;
-  let selectedOption = event.target.options[index].value;
-  this.setState({selectedFruitValue:selectedOption,});
-  /*this.setState((state)=> {return selectedFruitValue = selectedOption});*/
+selectedFruit(e) {
+  let {name, value} = e.target;
+  this.setState({
+  selectedFruitValue: value,
+});
 };
 
 addOrRemove(value){
-  console.log(value);
-
+  let basketArray = this.state.basketList;
+  if(value == 'add'){
+    basketArray.push(this.state.selectedFruitValue);
+    this.setState({
+      basketList : basketArray,
+    });
+  }else{
+    const removeVal = basketArray.lastIndexOf(this.state.selectedFruitValue);
+    let reomovedBasketList = basketArray.splice(removeVal, 1);
+    this.setState({
+      basketList : reomovedBasketList,
+    });
+  }
 }
 
 colorPickerFn(color){
-
   let colorPicked=color;
   this.setState({
     selectedColor:color
   })
-  console.log('check',color);
 }
 
   render() {
     return (
       <div>
-  
-       
-        <ColorPicker 
-        selectedColor={(e)=>this.colorPickerFn(e)}
-        colorsArray={this.state.colorsArray} />
-        <ApplySelectedColor color={this.state.selectedColor}  selectedColor={(e)=>this.colorPickerFn(e)}/>
+        <Fruits fruits={this.state.fruits} selectedFruitFn={(e)=>this.selectedFruit(e)} selectedFruitVal={this.state.value}/>
+        <Button clickFunction={(e) => this.addOrRemove(e)}/>
+        <Basket basketList={this.state.basketList}/>
       </div>
     );
   }

@@ -13,5 +13,5 @@ export default function Fruits(props){
   elements.map((value, index) => {
     items.push(<option key={index} value={value}>{value}</option>)
   });
-return <select value={props.selectedFruitValue} onChange={e=>props.selectedFruitFn()}>{items}</select>
+return <select value={props.selectedFruitVal} onChange={(e)=>props.selectedFruitFn(e)}>{items}</select>
 }

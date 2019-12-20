@@ -8,6 +8,7 @@ import Button from './Button';
 import ColorPicker from './ColorPicker';
 import ApplySelectedColor from './ApplySelectedColor';
 import ImagePicker from './ImagePicker';
+import RoutingExample from './RoutingExample';
 class App extends Component {
   constructor() {
     super();
@@ -55,8 +56,7 @@ colorPickerFn(color){
   render() {
     return (
       <div>
-        <ImagePicker selectedColor={(e) => this.colorPickerFn(e)} imageArray={this.state.bgArray}/>
-        <ApplySelectedColor image={this.state.selectedColor} selectedColor={(e) => this.colorPickerFn(e)}/>
+       <RoutingExample/>
       </div>
     );
   }
